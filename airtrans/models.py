@@ -35,6 +35,9 @@ class Flight(models.Model):
                                         related_name='arrival_airport',
                                         on_delete=models.CASCADE)
 
+    def save(self, *args, **kwags):
+
+        super().save(*args, **kwags)
 
 class TicketFlight(models.Model):
     ticket_no = models.ForeignKey(Ticket,
@@ -44,7 +47,9 @@ class TicketFlight(models.Model):
     fare_conditions = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('ticket_no', 'flight_id'), )
+        unique_together = (
+            ('ticket_no', 'flight_id'),
+        )
 
 
 class BoardingPass(models.Model):
